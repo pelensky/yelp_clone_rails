@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 feature 'restaurants' do
+
+  context 'when user is not logged in' do
+     scenario 'the user should be redirected to the login page' do
+       visit '/restaurants'
+       click_link 'Add a restaurant'
+       expect(page).to have_content "You need to sign in or sign up before continuing"
+     end
+   end
+
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurants' do
       visit '/restaurants'
@@ -22,6 +31,7 @@ feature 'restaurants' do
 
   context 'creating restaurants' do
     scenario 'promts user to fill out a form, then displays the new restaurant' do
+      sign_up
       visit '/restaurants'
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'Itadaki Zen'
@@ -32,6 +42,7 @@ feature 'restaurants' do
 
     context 'an invalid restaurant' do
       scenario 'does not let you submit a name that is too short' do
+        sign_up
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'kf'
@@ -58,6 +69,7 @@ feature 'restaurants' do
 
     before { Restaurant.create name: 'KFC', description: 'Deep fried goodness', id: 1 }
     scenario 'let a user edit a restaurant' do
+      sign_up
       visit '/restaurants'
       click_link 'Edit KFC'
       fill_in 'Name', with: 'Kentucky Fried Chicken'
@@ -76,6 +88,7 @@ feature 'restaurants' do
     before { Restaurant.create name: 'KFC', description: 'Deep fried goodness' }
 
     scenario 'removes restaurant when a user clicks delete' do
+      sign_up
       visit '/restaurants'
       click_link 'Delete KFC'
       expect(page).not_to have_content 'KFC'

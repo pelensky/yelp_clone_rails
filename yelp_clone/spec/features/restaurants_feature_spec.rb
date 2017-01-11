@@ -10,8 +10,8 @@ feature 'restaurants' do
      expect(page).to have_content 'No restaurants yet'
      expect(page).to have_link 'Add a restaurant'
 
-   end
- end
+    end
+  end
 
  context 'restaurants have been added' do
    before do
@@ -69,15 +69,26 @@ feature 'restaurants' do
 
   context 'deleting restaurants' do
 
-  before { Restaurant.create name: 'KFC', description: 'Deep fried goodness', id: 1 }
+      before do
+        sign_up
+        Restaurant.create name: 'KFC', description: 'Deep fried goodness', id: 1
+      end
 
-  scenario 'removes a restaurant when a user clicks a delete link' do
-    sign_up
-    visit '/restaurants'
-    click_link 'Delete KFC'
-    expect(page).not_to have_content 'KFC'
-    expect(page).to have_content 'Restaurant deleted successfully'
-  end
+      scenario 'removes a restaurant when a user clicks a delete link' do
+        visit '/restaurants'
+        click_link 'Delete KFC'
+        expect(page).not_to have_content 'KFC'
+        expect(page).to have_content 'Restaurant deleted successfully'
+      end
+
+      scenario 'User cannot delete a restaurant they did not create' do
+        log_out
+        sign_up_2
+        visit '/restaurants'
+        click_link 'Delete KFC'
+        expect(page).to have_content 'error'
+      end
+    end
 
   context 'an invalid restaurant' do
     scenario 'does not let you submit a name that is too short' do
@@ -90,7 +101,5 @@ feature 'restaurants' do
       expect(page).to have_content 'error'
     end
   end
-
-end
 
 end

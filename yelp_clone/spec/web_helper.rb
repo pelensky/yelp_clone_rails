@@ -7,6 +7,15 @@ def sign_up
   click_button('Sign up')
 end
 
+def sign_up_2
+  visit('/')
+  click_link('Sign up')
+  fill_in('Email', with: 'test@example2.com')
+  fill_in('Password', with: 'abcd1234')
+  fill_in('Password confirmation', with: 'abcd1234')
+  click_button('Sign up')
+end
+
 
 def sign_in
   visit('/')
@@ -14,4 +23,8 @@ def sign_in
   fill_in('Email', with: 'test@example.com')
   fill_in('Password', with: 'abcd1234')
   click_button('Log in')
+end
+
+def log_out
+  click_link('Sign out')
 end

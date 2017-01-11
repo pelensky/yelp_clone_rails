@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'web_helper'
 
 feature "User can sign in and out" do
   context "user not signed in and on the homepage" do
@@ -36,6 +37,16 @@ feature "User can sign in and out" do
       visit('/')
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
+    end
+  end
+
+  context "user must be logged in to create restaurants" do
+
+    it "should not allow you to create a restaurant without logging in" do
+      visit('/')
+      click_link('Add a restaurant')
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+      expect(current_path).to eq '/users/sign_in'
     end
   end
 

@@ -13,4 +13,5 @@ it 'is not valid with a name of less than three characters' do
     restaurant = Restaurant.new(name: "Moe's Tavern")
     expect(restaurant).to have(1).error_on(:name)
   end
+  
 end

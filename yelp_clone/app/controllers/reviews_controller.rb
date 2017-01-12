@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
     review = @restaurant.reviews.create(review_params)
     @user.reviews << review
     @user.save
+    review.save
     redirect_to '/restaurants'
   end
 

@@ -5,8 +5,7 @@ feature 'restaurants' do
   context 'when user is not logged in' do
      scenario 'the user should be redirected to the login page' do
        visit '/restaurants'
-       click_link 'Add a restaurant'
-       expect(page).to have_content "You need to sign in or sign up before continuing"
+       expect(page).not_to have_content "Add a restaurant"
      end
    end
 

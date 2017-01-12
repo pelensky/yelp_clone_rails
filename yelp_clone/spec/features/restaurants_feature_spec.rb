@@ -70,6 +70,13 @@ feature 'restaurants' do
       expect(page).to have_content 'Kentucky Fried Chicken'
       expect(page).to have_content 'Deep fried goodness'
     end
+
+    scenario 'users cannot edit a restaurant they did not create' do
+      log_out
+      sign_up_2
+      visit '/restaurants'
+      expect(page).not_to have_content 'Edit KFC'
+    end
   end
 
   context 'deleting restaurants' do
@@ -89,7 +96,6 @@ feature 'restaurants' do
       scenario 'User cannot delete a restaurant they did not create' do
         log_out
         sign_up_2
-        byebug
         visit '/restaurants'
         expect(page).not_to have_content 'Delete KFC'
       end

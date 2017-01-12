@@ -9,13 +9,16 @@
     <br>
   <% if (current_user != nil) && (!current_user.has_reviewed?(restaurant)) %>
     <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
+    <br>
   <% end %>
 
   <br>
   <% if restaurant.reviews.any? %>
+  Average rating: <%= restaurant.average_rating.to_i %>
     <% restaurant.reviews.all.each do |review| %>
         <%= review.thoughts %>
         <%= review.rating %>
+        <br>
     <% end %>
   <% end %>
 <% end %>

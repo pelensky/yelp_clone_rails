@@ -22,3 +22,33 @@ describe 'reviews' do
     end
   end
 end
+
+describe 'average rating' do
+  context 'no reviews' do
+    it 'returns N/A' do
+      user = User.create(email: 'test@test.com', password: 'testtest', password_confirmation: 'testtest')
+      restaurant = Restaurant.create(name: 'The Ivy', user_id: user.id)
+      expect(restaurant.average_rating).to eq 'N/A'
+    end
+  end
+
+  context 'one review' do
+    it 'shows rating' do
+      user = User.create(email: 'test@test.com', password: 'testtest', password_confirmation: 'testtest')
+      restaurant = Restaurant.create(name: 'The Ivy', user_id: user.id)
+      restaurant.reviews.create_with_user({rating: 4}, user)
+      expect(restaurant.average_rating).to eq 4
+    end
+  end
+
+  context 'multiple reviews' do
+    it 'shows average' do
+      user = User.create(email: 'test@test.com', password: 'testtest', password_confirmation: 'testtest')
+      user2 = User.create(email: 'user2@test.com', password: 'testtest', password_confirmation: 'testtest')
+      restaurant = Restaurant.create(name: 'The Ivy', user_id: user.id)
+      restaurant.reviews.create_with_user({rating: 1}, user)
+      restaurant.reviews.create_with_user({rating: 5}, user2)
+      expect(restaurant.average_rating).to eq 3
+    end
+  end
+end

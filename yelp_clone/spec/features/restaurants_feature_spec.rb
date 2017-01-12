@@ -89,9 +89,9 @@ feature 'restaurants' do
       scenario 'User cannot delete a restaurant they did not create' do
         log_out
         sign_up_2
+        byebug
         visit '/restaurants'
-        click_link 'Delete KFC'
-        expect(page).to have_content 'error'
+        expect(page).not_to have_content 'Delete KFC'
       end
     end
 

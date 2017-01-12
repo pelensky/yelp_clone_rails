@@ -21,6 +21,6 @@ feature 'reviews' do
     sign_out
     sign_up_different_user
     leave_review('Great', '5')
-    expect(page).to have_content('Average rating: 4')
+    expect(page).to have_content('Average rating: ★★★★☆')
   end
 end

@@ -36,6 +36,13 @@ feature 'restaurants' do
       expect(page).to have_content 'KFC'
       expect(current_path).to eq '/restaurants'
     end
+
+    scenario 'user cannot create a restaurant with the same name of an existing restaurant' do
+      sign_up
+      create_restaurant
+      create_restaurant
+      expect(page).to have_content 'Name has already been taken'
+    end
   end
 
   context 'viewing restaurants' do

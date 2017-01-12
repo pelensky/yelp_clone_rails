@@ -8,14 +8,20 @@ feature 'reviewing' do
   end
 
   scenario 'allows users to leave a review using a form' do
-     visit '/restaurants'
-     click_link 'Review KFC'
-     fill_in "Thoughts", with: "so so"
-     select '3', from: 'Rating'
-     click_button 'Leave Review'
-
+     create_review
      expect(current_path).to eq '/restaurants'
      expect(page).to have_content('so so')
+  end
+
+  scenario 'user can not see Review link if they have not logged in' do
+    log_out
+    expect(page).not_to have_content('Review KFC')
+  end
+
+  scenario 'allows users to delete a review which they have created' do
+    create_review
+    click_link 'Delete KFC Review'
+    expect(page).not_to have_content('so so')
   end
 
 end

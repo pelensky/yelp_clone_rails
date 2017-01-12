@@ -11,8 +11,15 @@ class ReviewsController < ApplicationController
     review = @restaurant.reviews.create(review_params)
     @user.reviews << review
     @user.save
-    review.save
-    redirect_to '/restaurants'
+    if review.save
+      redirect_to restaurants_path
+    else
+      if review.errors[:user]
+        redirect_to restaurants_path, alert: 'You have already reviewed this restaurant'
+      else
+        render :new
+      end
+    end
   end
 
   private

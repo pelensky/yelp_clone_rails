@@ -28,3 +28,11 @@ end
 def log_out
   click_link('Sign out')
 end
+
+def create_restaurant
+  visit '/restaurants'
+  click_link 'Add a restaurant'
+  fill_in 'Name', with: 'KFC'
+  fill_in 'Description', with: 'Deep fried goodness'
+  click_button 'Create Restaurant'
+end

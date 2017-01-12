@@ -19,6 +19,9 @@
         <%= review.thoughts %>
         <%= review.rating %>
         <br>
+        <%= link_to "Endorse Review", review_endorsements_path(review), method: :post %>
+        <%= pluralize review.endorsements.count, 'endorsement' %>
+          <br>
     <% end %>
   <% end %>
 <% end %>

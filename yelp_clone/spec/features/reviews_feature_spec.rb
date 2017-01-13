@@ -24,4 +24,12 @@ feature 'reviewing' do
     expect(page).not_to have_content('so so')
   end
 
+  scenario 'displays an average rating for all reviews' do
+    create_review
+    log_out
+    sign_up_2
+    create_review("Great", 5)
+    expect(page).to have_content("Average rating: 4")
+  end
+
 end

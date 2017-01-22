@@ -1,24 +1,19 @@
-# README
+# Yelp Clone in Rails
+## Weekly Challenge
+### Week Eight
+=================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Instructions
+*****
+* Clone the repository
+* Run bundle `
+* Run `bin\rake db:migrate` to set up databases
+* Type `bin/rails s`
+* In a browser, navigate to ```localhost:3000```
+* You will have a clean slate, so sign up with as many users as you like,  post whatever you like, and review and endorse away!
 
-Things you may want to cover:
 
-* Ruby version
+The Task as described
+-------
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+We have a request from a client to write a yelp clone in Rails over the period of a week.

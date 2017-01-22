@@ -59,6 +59,5 @@ group :test do
   gem 'shoulda'
 end
 
-gem 'devise'
 gem 'omniauth-facebook'
 gem 'envyable'
